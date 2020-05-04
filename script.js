@@ -27,7 +27,9 @@ function MyButtonClick() {
         tick();
     }
     countdown(1);
-    getNextQuestion();
+    //getNextQuestion();
+    countFinalScore();
+
 }
 
 
@@ -36,8 +38,10 @@ var myObj = "";
 myObj = {
     "questions": [
         { "title": "Commonly used data types DO NOT include: ", "options": ["strings", "booleans", "alerts","numbers"] },
-        { "title": "Question Two", "options": ["option One", "option Two", "option Three"] },
-        { "title": "Question Three", "options": ["option One", "option Two", "option Three"] }
+        { "title": "The condition in an if/else statement is enclosed within: ", "options": ["quotes", "curly brackets", "parentheses", "square brackets"] },
+        { "title": "Arrays in Javascript can be used to store: ", "options": ["numbers and strings", "other arrays", "booleans", "all of the above"] },
+        { "title": "String values must be enclosed within _______ when being assigned to variables: ", "options": ["commas", "curly brackets", "quotes", "parentheses"] },
+        { "title": "A very useful tool used during development and debugging for printing content to the debugger is: ", "options": ["Javascript", "terminal/bash", "for loops", "console log"] }
     ]
 }
 
@@ -64,6 +68,9 @@ function getNextQuestion() {
                             </button><br>
                             <button id="mybutton3" class="btn btn-success mb-2">
                                 3. ${question.options[2]}
+                            </button><br>
+                            <button id="mybutton3" class="btn btn-success mb-2">
+                                4. ${question.options[3]}
                             </button><br>
                         </div>`;
 
@@ -101,3 +108,33 @@ var default_card = `<div id="default" class="card">
                             </div>
                         </div>
                     </div>`
+
+
+
+
+function countFinalScore() {
+
+    var finalScore = "Your final score is "; 
+    var card_allDone = document.createElement("div");
+    
+    card_allDone.setAttribute("class", "card");
+    card_allDone.innerHTML =    `<div class="card-body">
+                                    <h5>All Done!
+                                    </h5>
+                                    <div class="row py-2">
+                                        <span class="col">Your final score is:
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            Enter initials:
+                                            <input type="text"></input>
+                                            <!--Submit button here-->
+                                            <button id="submit-initials" class="btn btn-success mb-2">Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>`;
+
+        document.querySelector('#card-wrapper .card').replaceWith (card_allDone);
+}
