@@ -1,47 +1,30 @@
 
-
-var button = document.getElementById("mybutton");
-button.onclick = MyButtonClick;
-
-//Button Start
-function MyButtonClick() {
-
-    //Timer
-    function countdown(minutes) {
-        var seconds = 60;
-        var mins = minutes
-        function tick() {
-            //This script expects an element with an ID = "counter". You can change that to what ever you want. 
-            var counter = document.getElementById("counter");
-            var current_minutes = mins - 1
-            seconds--;
-            counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-            if (seconds > 0) {
-                setTimeout(tick, 1000);
-            } else {
-                if (mins > 1) {
-                    countdown(mins - 1);
-                }
-            }
+//myTimer
+var button = document.getElementById("startBtn");
+var intervalId = 0;
+button.onclick = ()=>{
+    var num = 5;
+    var counter = document.getElementById("counter");
+    counter.textContent = num;
+    intervalId = setInterval(() => {
+        num--;
+        counter.textContent = num;
+        if(num === 0){
+          //redirect GameOver
+            clearInterval(intervalId);
         }
-        tick();
-    }
-    countdown(1);
-    //getNextQuestion();
-    countFinalScore();
-
+      }, 1000);
 }
-
 
 //My HardCoded Questions
 var myObj = "";
 myObj = {
     "questions": [
-        { "title": "Commonly used data types DO NOT include: ", "options": ["strings", "booleans", "alerts","numbers"] },
-        { "title": "The condition in an if/else statement is enclosed within: ", "options": ["quotes", "curly brackets", "parentheses", "square brackets"] },
-        { "title": "Arrays in Javascript can be used to store: ", "options": ["numbers and strings", "other arrays", "booleans", "all of the above"] },
-        { "title": "String values must be enclosed within _______ when being assigned to variables: ", "options": ["commas", "curly brackets", "quotes", "parentheses"] },
-        { "title": "A very useful tool used during development and debugging for printing content to the debugger is: ", "options": ["Javascript", "terminal/bash", "for loops", "console log"] }
+        { "title": "Commonly used data types DO NOT include: ", "options": ["strings", "booleans", "alerts","numbers"], "answer": 2},
+        { "title": "The condition in an if/else statement is enclosed within: ", "options": ["quotes", "curly brackets", "parentheses", "square brackets"], "answer": 1},
+        { "title": "Arrays in Javascript can be used to store: ", "options": ["numbers and strings", "other arrays", "booleans", "all of the above"], "answer": 3},
+        { "title": "String values must be enclosed within _______ when being assigned to variables: ", "options": ["commas", "curly brackets", "quotes", "parentheses"], "answer": 2},
+        { "title": "A very useful tool used during development and debugging for printing content to the debugger is: ", "options": ["Javascript", "terminal/bash", "for loops", "console log"], "answer": 3}
     ]
 }
 
