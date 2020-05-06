@@ -1,5 +1,7 @@
 
 var QuizTitle = "Code Quiz Challenge!";
+var highscores = document.getElementById('Highscores');
+highscores.onclick=highScore_card;
 
 //Starting card.
 var default_card = `<div id="default" class="card">
@@ -72,16 +74,16 @@ function getNextQuestion() {
                             </div>
                             <!--Start Buttons here-->
                             <div class="col">
-                                <button id="mybutton1" class="btn btn-success mb-2">
+                                <button id="mybutton1" data-option="1" class="btn btn-success mb-2">
                                     1. ${question.options[0]}
                                 </button><br>
-                                <button id="mybutton2" class="btn btn-success mb-2">
+                                <button id="mybutton2" data-option="2" class="btn btn-success mb-2">
                                     2. ${question.options[1]}
                                 </button><br>
-                                <button id="mybutton3" class="btn btn-success mb-2">
+                                <button id="mybutton3" data-option="3" class="btn btn-success mb-2">
                                     3. ${question.options[2]}
                                 </button><br>
-                                <button id="mybutton4" class="btn btn-success mb-2">
+                                <button id="mybutton4" data-option="4" class="btn btn-success mb-2">
                                     4. ${question.options[3]}
                                 </button><br>
                             </div>`;
@@ -95,12 +97,7 @@ function getNextQuestion() {
 
 function evaluateAnswer(click){
     var answer =  questionsObj.questions[questionNumber -1].answer;
-    if((answer === 1 && click.target.id === "mybutton1") ||
-    (answer === 2 && click.target.id === "mybutton2") ||
-    (answer === 3 && click.target.id === "mybutton3") ||
-    (answer === 3 && click.target.id === "mybutton4") 
-    ){
-    }else{
+    if(answer !== click.target.dataset.option ){
         num = num -10;
     }
     if(questionsObj.questions.length > questionNumber){
@@ -137,10 +134,38 @@ function countFinalScore() {
     var submitBtn = document.getElementById("submit-initials");
     submitBtn.addEventListener("click", ()=>{
     var usrName = document.getElementById("initials").value;
-    localStorage.setItem("user", JSON.stringify(usrName));
-    localStorage.setItem("score", JSON.stringify(num));
+    var score = {
+        "initials" : usrName,
+        "score" : num
+    };
+    localStorage.setItem(Math.random(), JSON.stringify(score));
+    highScore_card();
     })
+}
 
-
+//High Score
+function highScore_card(){
+    var highScore_card = document.createElement("div");
+    highScore_card.setAttribute("class", "card");
+    highScore_card.innerHTML = `
+        <div class="card-body">
+            <h5 class="card-title text-center">Highscores</h5>
+            <hr />
+            <!--Row for Highscores-->
+            <div class="d-flex">
+                <div class="row mx-1 justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8 text-center">
+                        <p>
+                            This is the Highscore card
+                            <br>
+                            <button id="start-over">Start Over</button>
+                        </p>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>`
+        document.querySelector('#card-wrapper .card').replaceWith (highScore_card);
+       
 }
 
