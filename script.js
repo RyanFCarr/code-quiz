@@ -1,38 +1,7 @@
 
 var QuizTitle = "Code Quiz Challenge!";
 var highscores = document.getElementById('Highscores');
-highscores.onclick=highScore_card;
-
-//Starting card.
-var default_card = `<div id="default" class="card">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">
-                                Code Quiz Challenge!
-                            </h5>
-                            <hr />
-                            <!--Row for Instructions-->
-                            <div class="d-flex">
-                                <div class="row mx-1 justify-content-center">
-                                    <div class="col-12 col-md-10 col-lg-8 text-center">
-                                        <p>
-                                            Try to answer the following
-                                            code-related questions within the
-                                            time limit. Keep in mind that an
-                                            incorrect answer will penalize your
-                                            score by 10 seconds!
-                                        </p>
-                                        <br />
-                                        <!--Start Button here-->
-                                        <div class="col text-center">
-                                            <button id="mybutton" class="btn btn-success">
-                                                Start Quiz!
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`
+highscores.onclick=()=>{window.location.href = "highscores.html"};
 
 //Timer
 var num = 30;
@@ -134,38 +103,21 @@ function countFinalScore() {
     var submitBtn = document.getElementById("submit-initials");
     submitBtn.addEventListener("click", ()=>{
     var usrName = document.getElementById("initials").value;
-    var score = {
-        "initials" : usrName,
-        "score" : num
-    };
-    localStorage.setItem(Math.random(), JSON.stringify(score));
-    highScore_card();
+    var scores = JSON.parse(localStorage.getItem("scores"))
+    if(scores){
+        scores.scores.push({"initials" : usrName,"scores" : num})
+    }else{
+        scores = {
+            "scores" : [{
+                "initials" : usrName,
+                "scores" : num
+            }]
+        }
+    }
+    localStorage.setItem("scores", JSON.stringify(scores));
+    window.location.href = "highscores.html";
     })
 }
 
-//High Score
-function highScore_card(){
-    var highScore_card = document.createElement("div");
-    highScore_card.setAttribute("class", "card");
-    highScore_card.innerHTML = `
-        <div class="card-body">
-            <h5 class="card-title text-center">Highscores</h5>
-            <hr />
-            <!--Row for Highscores-->
-            <div class="d-flex">
-                <div class="row mx-1 justify-content-center">
-                    <div class="col-12 col-md-10 col-lg-8 text-center">
-                        <p>
-                            This is the Highscore card
-                            <br>
-                            <button id="start-over">Start Over</button>
-                        </p>
-                        <br />
-                    </div>
-                </div>
-            </div>
-        </div>`
-        document.querySelector('#card-wrapper .card').replaceWith (highScore_card);
-       
-}
+
 
