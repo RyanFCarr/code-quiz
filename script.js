@@ -107,6 +107,9 @@ function countFinalScore() {
     var scores = JSON.parse(localStorage.getItem("scores"))
     if(scores){
         scores.scores.push({"initials" : usrName,"scores" : num})
+        scores.scores.sort((a,b)=>{
+            return b.scores - a.scores;
+        });
     }else{
         scores = {
             "scores" : [{
