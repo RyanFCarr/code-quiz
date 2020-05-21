@@ -12,6 +12,8 @@ to insert a highscore. This will remain in
 local storage. A user has the option of clearing
 the score with a provide button.
 
+![code-quiz](https://user-images.githubusercontent.com/61035701/82515257-d4681280-9ae5-11ea-861f-913ce489a516.jpg)
+
 ## Author
 * **Ryan Carr** - [RyanFCarr](https://github.com/RyanFCarr)
 
