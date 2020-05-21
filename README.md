@@ -10,3 +10,5 @@ Upon completion, a user may enter their name
 to insert a highscore. This will remain in
 local storage. A user has the option of clearing
 the score with a provide button.
+
+Here is the deployed version: [code-quiz](https://ryanfcarr.github.io/code-quiz/) 
